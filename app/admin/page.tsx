@@ -6,7 +6,10 @@ import { useRouter } from 'next/navigation';
 export default function AdminDashboard() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const router = useRouter();
-    const [stats, setStats] = useState(null);
+    const [stats, setStats] = useState({
+        users: [],
+        pagination: {}
+    });
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(10);
@@ -83,7 +86,7 @@ export default function AdminDashboard() {
         }
     };
 
-    const handlePageChange = (newPage) => {
+    const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
     };
 
