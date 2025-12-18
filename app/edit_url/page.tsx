@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export default function EditUrl({ link, onClose, onUpdate, onDelete }) {
-    const [newAlias, setNewAlias] = useState(link.short_code);
+    const [newAlias, setNewAlias] = useState(link?.short_code || '');
     const [loading, setLoading] = useState(false);
 
     const handleSave = async () => {
@@ -61,7 +61,7 @@ export default function EditUrl({ link, onClose, onUpdate, onDelete }) {
             setLoading(false);
         }
     };
-
+    if (!link) return null;
     return (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000] p-4">
             <div className="bg-white/95 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.2)] p-6 w-full max-w-[400px] animate-[fadeIn_0.3s_ease-out]">
