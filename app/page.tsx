@@ -20,7 +20,7 @@ export default function Home() {
     setShortUrl('');
     setCopied(false);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/long-url`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/long-url`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ long_url: inputUrl }),
