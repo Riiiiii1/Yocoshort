@@ -4,24 +4,25 @@ import { useState, useEffect } from 'react';
 export default function Metrics({ link, onClose, myDomain }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    // Proteccion 
     useEffect(() => {
+        if (!link?.id) return;
         const fetchMetrics = async () => {
             const token = localStorage.getItem('api_token');
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/links/${link.id}/metrics`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/links/${link?.id}/metrics`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) setData(await res.json());
             setLoading(false);
         };
         fetchMetrics();
-    }, [link.id]);
+    }, [link?.id]);
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[1000] p-4">
             <div className="bg-white/95 rounded-3xl p-6 md:p-8 w-full max-w-2xl shadow-[0_10px_40px_rgba(0,0,0,0.2)] animate-[fadeIn_0.3s_ease-out]">
                 <div className="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
-                    <h2 className="text-2xl font-bold text-[#155dfc]">Métricas de /{link.short_code}</h2>
+                    <h2 className="text-2xl font-bold text-[#155dfc]">Métricas de /{link?.short_code}</h2>
                     <button
                         onClick={onClose}
                         className="text-gray-400 hover:text-gray-600 text-2xl hover:scale-110 transition-transform duration-200"
