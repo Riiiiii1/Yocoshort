@@ -7,6 +7,8 @@ export default function AdminDashboard() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const router = useRouter();
     const [stats, setStats] = useState({
+        total_users: 0,
+        total_links: 0,
         users: [],
         pagination: {}
     });
